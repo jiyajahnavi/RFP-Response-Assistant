@@ -1,4 +1,4 @@
-# RFP Response Assistant – Phase 1: Backend Foundation & Database Setup
+# RFP Response Assistant 
 
 An AI-powered application designed for managing Requests for Proposals (RFPs), extracting questions, generating draft responses, and managing the proposal approval workflow.
 

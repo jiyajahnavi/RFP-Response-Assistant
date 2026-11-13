@@ -2,7 +2,7 @@ import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy import text
 
 from app.core.config import settings
@@ -34,9 +34,9 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     description="Backend API for the RFP Response Assistant application.",
     version="1.0.0",
-    openapi_url=f"{settings.API_V1_PREFIX}/openapi.json",
-    docs_url=f"{settings.API_V1_PREFIX}/docs",
-    redoc_url=f"{settings.API_V1_PREFIX}/redoc",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json",
     lifespan=lifespan,
 )
 
@@ -72,10 +72,25 @@ async def global_exception_handler(request: Request, exc: Exception):
 app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 
 
+@app.get("/api/v1/docs", include_in_schema=False)
+def redirect_v1_docs():
+    return RedirectResponse(url="/docs")
+
+
+@app.get("/api/v1/redoc", include_in_schema=False)
+def redirect_v1_redoc():
+    return RedirectResponse(url="/redoc")
+
+
+@app.get("/api/v1/openapi.json", include_in_schema=False)
+def redirect_v1_openapi():
+    return RedirectResponse(url="/openapi.json")
+
+
 @app.get("/", include_in_schema=False)
 def root_redirect():
     return {
         "message": f"Welcome to {settings.PROJECT_NAME}",
-        "documentation": f"{settings.API_V1_PREFIX}/docs",
+        "documentation": "/docs",
         "health": f"{settings.API_V1_PREFIX}/health",
     }
