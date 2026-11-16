@@ -33,3 +33,12 @@ class BusinessRuleValidationException(AppException):
             status_code=422,
             details={"rule": rule} if rule else {},
         )
+
+
+class DomainValidationException(AppException):
+    def __init__(self, message: str, details: dict = None):
+        super().__init__(
+            message=message,
+            status_code=400,
+            details=details or {},
+        )

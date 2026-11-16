@@ -86,10 +86,12 @@ class RFPQuestion(Base):
     Category = Column(String(100), nullable=True, index=True)
     Sequence = Column(Integer, nullable=False, default=1)
     Status = Column(String(50), nullable=False, default=QuestionStatus.PENDING.value)
+    AssignedTo = Column(Integer, ForeignKey("application_users.UserId", ondelete="SET NULL"), nullable=True, index=True)
     CreatedDate = Column(DateTime, default=utcnow, nullable=False)
 
     # Business rule: Every question belongs to exactly one RFP
     rfp = relationship("RFP", back_populates="questions")
+    assigned_user = relationship("ApplicationUser", foreign_keys=[AssignedTo])
     responses = relationship("RFPResponse", back_populates="question", cascade="all, delete-orphan")
 
     __table_args__ = (
