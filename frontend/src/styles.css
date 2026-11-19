@@ -1,0 +1,180 @@
+/* ==========================================================================
+   SKETCH UI DESIGN SYSTEM & HAND-DRAWN COMPONENT STYLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&family=Neucha&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+:root {
+  --sketch-ink: #212529;
+  --sketch-paper: #fffefb;
+  --sketch-paper-alt: #f8f6f0;
+  --sketch-blue: #2563eb;
+  --sketch-blue-light: #eff6ff;
+  --sketch-blue-border: #3b82f6;
+  --sketch-green: #15803d;
+  --sketch-green-light: #f0fdf4;
+  --sketch-amber: #b45309;
+  --sketch-amber-light: #fffbeb;
+  --sketch-red: #dc2626;
+  --sketch-red-light: #fef2f2;
+  --sketch-purple: #7c3aed;
+  --sketch-purple-light: #f5f3ff;
+  --sketch-shadow: 3px 4px 0px var(--sketch-ink);
+  --sketch-shadow-hover: 5px 6px 0px var(--sketch-ink);
+  --sketch-shadow-active: 1px 2px 0px var(--sketch-ink);
+  --sketch-border-radius-1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --sketch-border-radius-2: 20px 255px 20px 25px / 225px 15px 225px 15px;
+  --sketch-border-radius-3: 255px 25px 225px 25px / 25px 225px 25px 255px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.sketch-bg {
+  background-color: #f7f4ed !important;
+  background-image: 
+    radial-gradient(#e5dec9 1px, transparent 1px),
+    radial-gradient(#e5dec9 1px, #f7f4ed 1px) !important;
+  background-size: 24px 24px !important;
+  background-position: 0 0, 12px 12px !important;
+  color: var(--sketch-ink) !important;
+  font-family: 'Patrick Hand', 'Neucha', -apple-system, sans-serif !important;
+  font-size: 17px !important;
+  line-height: 1.5 !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings font */
+h1, h2, h3, h4, h5, h6, .sketch-title {
+  font-family: 'Architects Daughter', 'Patrick Hand', cursive !important;
+  color: var(--sketch-ink) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+}
+
+/* Hand-drawn Sketchy Cards */
+.sketch-card {
+  background: var(--sketch-paper) !important;
+  border: 2px solid var(--sketch-ink) !important;
+  border-radius: var(--sketch-border-radius-1) !important;
+  box-shadow: var(--sketch-shadow) !important;
+  padding: 20px;
+  transition: all 0.15s ease-in-out;
+  position: relative;
+}
+
+.sketch-card:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: var(--sketch-shadow-hover) !important;
+}
+
+/* Hand-drawn Buttons */
+.btn-sketch {
+  font-family: 'Architects Daughter', cursive !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--sketch-ink) !important;
+  border-radius: var(--sketch-border-radius-2) !important;
+  box-shadow: var(--sketch-shadow) !important;
+  padding: 8px 18px !important;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none !important;
+}
+
+.btn-sketch:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: var(--sketch-shadow-hover) !important;
+}
+
+.btn-sketch:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--sketch-shadow-active) !important;
+}
+
+.btn-sketch-primary {
+  background-color: #fde047 !important; /* Pencil highlighter yellow */
+  color: var(--sketch-ink) !important;
+}
+
+.btn-sketch-secondary {
+  background-color: #e2e8f0 !important;
+  color: var(--sketch-ink) !important;
+}
+
+.btn-sketch-blue {
+  background-color: #bae6fd !important;
+  color: #0369a1 !important;
+}
+
+.btn-sketch-green {
+  background-color: #bbf7d0 !important;
+  color: #14532d !important;
+}
+
+.btn-sketch-red {
+  background-color: #fecaca !important;
+  color: #991b1b !important;
+}
+
+.btn-sketch-purple {
+  background-color: #e9d5ff !important;
+  color: #581c87 !important;
+}
+
+/* Hand-drawn Sketchy Input & Textarea */
+.sketch-input, .sketch-textarea, .sketch-select {
+  font-family: 'Patrick Hand', cursive !important;
+  font-size: 17px !important;
+  background-color: #ffffff !important;
+  border: 2px solid var(--sketch-ink) !important;
+  border-radius: var(--sketch-border-radius-3) !important;
+  box-shadow: 2px 2px 0px var(--sketch-ink) !important;
+  padding: 10px 14px !important;
+  outline: none;
+  width: 100%;
+  color: var(--sketch-ink) !important;
+}
+
+.sketch-input:focus, .sketch-textarea:focus, .sketch-select:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 3px 4px 0px #0284c7 !important;
+  transform: translate(-1px, -1px);
+}
+
+/* Sketchy Badges & Status Pills */
+.sketch-badge {
+  font-family: 'Architects Daughter', cursive !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border: 1.5px solid var(--sketch-ink) !important;
+  border-radius: var(--sketch-border-radius-1) !important;
+  padding: 3px 10px !important;
+  display: inline-block;
+  box-shadow: 1px 2px 0px var(--sketch-ink) !important;
+  text-transform: uppercase;
+}
+
+.badge-draft { background-color: #f3f4f6 !important; color: #374151 !important; }
+.badge-inreview { background-color: #fef08a !important; color: #854d0e !important; }
+.badge-approved { background-color: #bbf7d0 !important; color: #166534 !important; }
+.badge-rejected { background-color: #fecaca !important; color: #991b1b !important; }
+
+/* Sketchy Tape / Pin Accent Effect */
+.sketch-tape {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  width: 70px;
+  height: 20px;
+  background-color: rgba(254, 240, 138, 0.7);
+  border: 1px dashed rgba(161, 98, 7, 0.5);
+  transform: rotate(-3deg);
+  pointer-events: none;
+}

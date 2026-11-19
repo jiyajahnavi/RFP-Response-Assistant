@@ -113,3 +113,114 @@ class DocumentIngestionResponse(BaseModel):
 class ErrorDetail(BaseModel):
     message: str
     details: Optional[dict] = None
+
+
+# Phase 3 & 4 Schemas: Responses, Versions, Library, and Approvals
+class ResponseVersionResponse(BaseModel):
+    VersionId: int
+    ResponseId: int
+    ResponseText: str
+    VersionNumber: int
+    UpdatedBy: Optional[int] = None
+    UpdatedDate: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class RFPResponseDetail(BaseModel):
+    ResponseId: int
+    QuestionId: int
+    ResponseText: str
+    IsAIGenerated: bool
+    Status: str
+    UpdatedBy: Optional[int] = None
+    UpdatedDate: datetime
+    ApprovedBy: Optional[int] = None
+    ApprovedDate: Optional[datetime] = None
+    approver: Optional[ApplicationUserResponse] = None
+    versions: List[ResponseVersionResponse] = []
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ResponseCreateRequest(BaseModel):
+    ResponseText: str = Field(..., min_length=1)
+    UpdatedBy: Optional[int] = None
+
+
+class ResponseUpdateRequest(BaseModel):
+    ResponseText: str = Field(..., min_length=1)
+    UpdatedBy: Optional[int] = None
+
+
+class ResponseStatusUpdateRequest(BaseModel):
+    Status: str = Field(..., description="Target status: 'Draft', 'In Review', 'Approved', 'Rejected'")
+    ReviewerId: Optional[int] = Field(default=None, description="UserId of reviewer")
+
+
+class ResponseLibraryItem(BaseModel):
+    LibraryId: int
+    Question: str
+    Answer: str
+    Category: Optional[str] = None
+    Technology: Optional[str] = None
+    SourceRfpId: Optional[int] = None
+    CreatedDate: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ResponseLibraryCreate(BaseModel):
+    Question: str = Field(..., min_length=3)
+    Answer: str = Field(..., min_length=3)
+    Category: Optional[str] = None
+    Technology: Optional[str] = None
+    SourceRfpId: Optional[int] = None
+
+
+class LibrarySearchResponse(BaseModel):
+    library_id: int
+    question: str
+    answer: str
+    category: Optional[str] = None
+    technology: Optional[str] = None
+    confidence_score: float
+
+
+class AIGenerateDraftRequest(BaseModel):
+    ContextNotes: Optional[str] = None
+
+
+class AIGenerateDraftResponse(BaseModel):
+    draft_text: str
+    confidence_score: float
+    citations: List[dict] = []
+    status: str
+    is_ai_generated: bool
+    saved_response: Optional[RFPResponseDetail] = None
+
+
+class PromoteToLibraryRequest(BaseModel):
+    Category: Optional[str] = None
+    Technology: Optional[str] = None
+
+
+class AnalyticsResponse(BaseModel):
+    rfp_id: Optional[int] = None
+    title: Optional[str] = None
+    customer_name: Optional[str] = None
+    total_questions: Optional[int] = None
+    answered_questions: Optional[int] = None
+    approved_questions: Optional[int] = None
+    completion_percentage: Optional[float] = None
+    status_distribution: Optional[dict] = None
+    category_distribution: Optional[dict] = None
+    due_date: Optional[str] = None
+    days_remaining: Optional[int] = None
+    is_overdue: Optional[bool] = None
+    # System wide metrics
+    total_rfps: Optional[int] = None
+    total_responses: Optional[int] = None
+    total_approved_responses: Optional[int] = None
+    total_library_entries: Optional[int] = None
+    overall_approval_rate: Optional[float] = None

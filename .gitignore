@@ -31,3 +31,10 @@ htmlcov/
 # Logs
 *.log
 logs/
+
+
+# Frontend Node & Angular build artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.vscode/

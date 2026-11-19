@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -19,6 +19,15 @@ class Settings(BaseSettings):
     DB_MAX_OVERFLOW: int = 20
     DB_POOL_TIMEOUT: int = 30
     DB_ECHO: bool = False
+
+    # AI Configuration (Gemini API & Azure OpenAI compatible options)
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+    GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-2"
+    AZURE_OPENAI_API_KEY: Optional[str] = None
+    AZURE_OPENAI_ENDPOINT: Optional[str] = None
+    AZURE_OPENAI_DEPLOYMENT_NAME: Optional[str] = "gpt-4o"
+    AZURE_OPENAI_EMBEDDING_DEPLOYMENT: Optional[str] = "text-embedding-ada-002"
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
